@@ -26,6 +26,26 @@ typedef rt_base_t rt_off_t;
 #define RT_TRUE 1
 #define RT_FALSE 0
 
-    
+
+
+/* GNC 扩展简化封装 */
+/* adapt ARM  */
+#ifdef __CC_ARM
+    #define rt_inline static __inline 
+    #define ALIGN(n)   __attribute__((aligned(n)))
+#elif defined (IAR_SYSTEM_ICC)
+    #define rt_inline static inline
+    #define ALIGN(n) PRAGMA(data_alignment=n)
+#elif defined (__GNUC__)
+    #define rt_inline static __inline
+    #define ALIGN(n) __attribute((aligned(n)))
+#else 
+    #error not suport tool chain
+#endif
+
+/* 计算对齐地址 */
+#define RT_ALIGN(size,align)  (((size)+(align)-1)&(~((align)-1)))
+/* 计算对齐地址 */
+#define RT_ALIGN_DOWN(size,align)  ((size)&(~((align)-1)))
 
 #endif
