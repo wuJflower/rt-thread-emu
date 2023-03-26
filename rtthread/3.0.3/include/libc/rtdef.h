@@ -26,6 +26,32 @@ typedef rt_base_t rt_off_t;
 #define RT_TRUE 1
 #define RT_FALSE 0
 
-    
+/* 内联关键字和对齐关键字 */
+#ifdef __CC_ARM
+    #define rt_inline static__inline
+    #define ALIGN(n) __attribute__(aligned(n))
+#elif defined (__IAR_SYSTEMS_ICC__)
+    #define rt_inline static inline
+    #define ALIGN(n) PRAMA(data_alignment=n)
+#elif defined (__GNUC__)
+    #define rt_inline static __inline
+    #define ALIGN(n) __attribute__(aligned(n))
+#else   
+    #error not suported tool chain
+#endif
+
+
+/* 字节对齐计算 */
+/* 向上对齐 */
+#define RT_ALIGN(size,align)   (((size)+((align)-1))&!((align)-1))
+/* 向下对齐 */
+#define RT_ALIGN(size,align)    ((size)&~((align)-1))
+
+/* 定义空  */
+#define  RT_NULL (0)
+
+
+
+
 
 #endif
