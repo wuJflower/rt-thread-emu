@@ -48,5 +48,6 @@ typedef rt_base_t rt_off_t;
 /* 计算对齐地址 */
 #define RT_ALIGN_DOWN(size,align)  ((size)&(~((align)-1)))
 
+/* 空值 */
 #define RT_NULL (0)
 #endif
