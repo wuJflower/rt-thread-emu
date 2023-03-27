@@ -43,9 +43,9 @@ typedef rt_base_t rt_off_t;
     #error not suport tool chain
 #endif
 
-/* 计算对齐地址 */
+/* 计算对齐地址 位运算实现取模*/
 #define RT_ALIGN(size,align)  (((size)+(align)-1)&(~((align)-1)))
-/* 计算对齐地址 */
+/* 计算对齐地址 位运算实现 */
 #define RT_ALIGN_DOWN(size,align)  ((size)&(~((align)-1)))
 
 /* 空值 */
